@@ -1,3 +1,9 @@
+x = 0;
+y = 0;
+leftWristX = 0;
+rightWristX = 0;
+difference = 0;
+
 function setup(){
     video = createCapture(VIDEO);
     video.size(550,500);
@@ -15,6 +21,10 @@ function modelLoaded(){
 
 function draw(){
     background('#969A97');
+
+    textSize(difference);
+    fill("#FF2D00");
+    text('text to be displayed', 50,100);
 }
 
 function gotPoses(results)
@@ -22,5 +32,8 @@ function gotPoses(results)
     if(results.length > 0)
     {
         console.log(results);
+        leftWristX = results[0].pose.leftWrist.x;
+        rightWristX = results[0].pose.rightWrist.x;
+        difference = floor(leftWristX - rightWristX);
     }
 }
